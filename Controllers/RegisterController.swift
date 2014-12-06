@@ -15,17 +15,19 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registrationButton: UIButton!
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
-        if success {
-            var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
-            println(storyBoard)
-            var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
-            println(profile)
-            navigationController?.pushViewController(profile, animated: true)
-            //self.presentViewController(profile, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Error", message: "Wrong user name.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController( alert, animated: true, completion: nil )
+        let username = textField.text
+        User.createUser( textField.text) { (error, user) -> () in
+            if error.isEmpty {
+                var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
+                println(storyBoard)
+                var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
+                println(profile)
+                self.navigationController?.pushViewController(profile, animated: true)
+            } else {
+                let alert = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController( alert, animated: true, completion: nil )
+            }
         }
     }
     
