@@ -73,6 +73,7 @@
                     <connections>
                         <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
                         <outlet property="textField" destination="H9W-ea-3UW" id="CPE-z9-k2f"/>
+                        <outlet property="urlTextField" destination="RGd-CF-cfS" id="0Kc-vX-2ik"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,6 +113,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="PlayAction:" destination="Dfp-YX-bdm" eventType="touchUpInside" id="lVK-EN-P8T"/>
                                     <segue destination="daH-pY-RP4" kind="push" id="j42-Fw-sy3"/>
                                 </connections>
                             </button>
@@ -120,6 +122,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="mGa-gb-Xrl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="moneyLabel" destination="gUB-3p-lTB" id="RG4-al-ixZ"/>
+                        <outlet property="playButton" destination="9h4-da-IVW" id="m9Y-TC-Xsj"/>
+                        <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="pz5-VL-psN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IJ-hX-1FQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

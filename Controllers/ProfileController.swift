@@ -11,9 +11,19 @@ import UIKit
 
 class ProfileController: UIViewController {
     
+    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    @IBAction func PlayAction(sender: UIButton) {
+        
+        
+    }
 }
