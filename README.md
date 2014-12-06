@@ -4,6 +4,17 @@
 
 ## API
 
+### URL list
+
+1. `/user/count`
+2. `/user/<username>/add`
+3. `/user/<identifier>/info/<attribute>`
+4. `/user/<identifier>/remove`
+
+### URL responses
+
+
+
 ```Python
 
 @app.route('/user/<username>/add')
