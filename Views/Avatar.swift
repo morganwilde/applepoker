@@ -38,20 +38,6 @@ class Avatar:UIImageView{
         super.init(frame: frame)
     }
 
-    /*init(coder aDecoder: NSCoder, url urlToAvatar:String){
-        super.init(coder: aDecoder)
-        
-        dispatch_async(dispatch_get_main_queue(), {
-            //let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
-            let url0 = NSURL(string: urlToAvatar)
-            let data = NSData(contentsOfURL: url0!)
-            let timage = UIImage(data: data!)
-            
-            self.image = timage
-            self.setNeedsDisplay()
-        })
-        
-    }*/
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
