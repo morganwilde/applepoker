@@ -121,6 +121,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="mGa-gb-Xrl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="avatarImage" destination="Jel-VG-Ccf" id="ubL-tf-RJF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IJ-hX-1FQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

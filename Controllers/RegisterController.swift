@@ -14,18 +14,27 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var urlImageTextField: UITextField!
     @IBOutlet weak var registrationButton: UIButton!
+   
+    
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
         let username = textField.text
         User.createUser(textField.text, imageUrl: urlImageTextField.text, { (error, user) -> () in
             if error.isEmpty {
+                
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
                 var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
                 self.navigationController?.pushViewController(profile, animated: true)
+                let appDelegate = UIApplcation.sharedApplication().delegate as AppDelegate
+                appDelegate.currentUser = user
+                
+                
             } else {
+                
                 let alert = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController( alert, animated: true, completion: nil )
+                
             }
         })
     }
