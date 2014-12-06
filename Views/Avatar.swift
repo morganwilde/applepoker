@@ -13,24 +13,49 @@ import UIKit
 
 class Avatar:UIImageView{
     
+    var onlineImageStorage: String?
+    var onlineImage: String {
+        get {
+            return onlineImageStorage!
+        }
+        set {
+            onlineImageStorage = newValue
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                //let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
+                
+                let url0 = NSURL(string: newValue)
+                let data = NSData(contentsOfURL: url0!)
+                let timage = UIImage(data: data!)
+                
+                self.image = timage
+                self.setNeedsDisplay()
+            })
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    /*init(coder aDecoder: NSCoder, url urlToAvatar:String){
         super.init(coder: aDecoder)
         
-        println("init")
-        
         dispatch_async(dispatch_get_main_queue(), {
-            let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
+            //let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
+            let url0 = NSURL(string: urlToAvatar)
             let data = NSData(contentsOfURL: url0!)
             let timage = UIImage(data: data!)
             
             self.image = timage
             self.setNeedsDisplay()
-            println("zoom")
         })
+        
+    }*/
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
     }
     
     
