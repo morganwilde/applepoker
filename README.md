@@ -6,10 +6,11 @@
 
 ### URL list
 
-1. `/user/count`
-2. `/user/<username>/add`
-3. `/user/<identifier>/info/<attribute>`
-4. `/user/<identifier>/remove`
+1. `http://applepoker.herokuapp.com/user/count`
+2. `http://applepoker.herokuapp.com/user/<username>/add`
+3. `http://applepoker.herokuapp.com/user/<identifier>/update/avatar/<avatar>`
+3. `http://applepoker.herokuapp.com/user/<identifier>/info/<attribute>`
+4. `http://applepoker.herokuapp.com/user/<identifier>/remove`
 
 ### URL responses
 
