@@ -19,9 +19,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         User.createUser( textField.text) { (error, user) -> () in
             if error.isEmpty {
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
-                println(storyBoard)
                 var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
-                println(profile)
                 self.navigationController?.pushViewController(profile, animated: true)
             } else {
                 let alert = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
