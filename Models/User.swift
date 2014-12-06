@@ -8,8 +8,6 @@ import Foundation
 import UIKit
 import CoreData
 
-
-
 class User {
 
     init(username: String) {
