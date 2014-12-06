@@ -25,7 +25,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
                 var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
                 self.navigationController?.pushViewController(profile, animated: true)
-                let appDelegate = UIApplcation.sharedApplication().delegate as AppDelegate
+                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
                 appDelegate.currentUser = user
                 
                 

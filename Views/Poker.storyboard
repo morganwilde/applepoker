@@ -123,6 +123,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="avatarImage" destination="Jel-VG-Ccf" id="ubL-tf-RJF"/>
+                        <outlet property="moneyLabel" destination="gUB-3p-lTB" id="tey-HH-oGf"/>
+                        <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="Mfa-1r-RqG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IJ-hX-1FQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
