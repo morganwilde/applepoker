@@ -8,6 +8,7 @@
 
 1. `http://applepoker.herokuapp.com/user/count`
 2. `http://applepoker.herokuapp.com/user/<username>/add`
+3. `http://applepoker.herokuapp.com/user/<identifier>/update/avatar/<avatar>`
 3. `http://applepoker.herokuapp.com/user/<identifier>/info/<attribute>`
 4. `http://applepoker.herokuapp.com/user/<identifier>/remove`
 
