@@ -26,11 +26,14 @@ class User {
         var myUser: User?
         
         // Call API with the username
-        let userAddUrl = "http://applegame.herokuapp.com/user/\(username)/add"
+        let userAddUrl = "http://applepoker.herokuapp.com/user/\(username)/add"
         let url: NSURL = NSURL(string: userAddUrl)!
         
         let request: NSURLRequest = NSURLRequest(URL : url)
         let queue: NSOperationQueue = NSOperationQueue()
+        
+        println("Hello")
+
         
         NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler:{
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -46,7 +49,6 @@ class User {
                 returnString = dataString
             }
             
-            println("Hello")
             
             // Callback on UI Thread
             dispatch_async(dispatch_get_main_queue(),{
