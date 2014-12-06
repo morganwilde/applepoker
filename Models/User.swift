@@ -32,7 +32,7 @@ class User {
             id = user.valueForKey("id") as Int!
             //            name = user.valueForKey(key: "money");
         } else {
-            println("Error")
+            println("Error couldn't fetch the user from DB")
         }
     }
     
@@ -88,10 +88,15 @@ class User {
             if success {
                 // User added, now try to set avatar
                 let identifier = dataString.toInt()!
-                
-                let avatarSetUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar/\(imageUrl)"
+                let avatarSetUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar?url=\(imageUrl)"
+//
+//                let fixedImageUrl = imageUrl.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+//                let fixedUrl = avatarSetUrl + fixedImageUrl!
+                println(avatarSetUrl)
+
                 let url: NSURL = NSURL(string: avatarSetUrl)!
-                
+
+
                 let request: NSURLRequest = NSURLRequest(URL : url)
                 
                 NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler:{
@@ -102,7 +107,6 @@ class User {
                     let success = dataString.rangeOfString(imageUrl) != nil;
                     if success {
                         self.saveUserInDB(username, imageUrl: imageUrl, userId: identifier);
-                        
                         myUser = User();
                     } else {
                         returnString = dataString
