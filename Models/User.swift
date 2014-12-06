@@ -26,7 +26,7 @@ class User {
         var myUser: User?
         
         // Call API with the username
-        let userAddUrl = "http://applegame.herokuapp.com/user/\(username)/add"
+        let userAddUrl = "http://applepoker.herokuapp.com/user/\(username)/add"
         let url: NSURL = NSURL(string: userAddUrl)!
         
         let request: NSURLRequest = NSURLRequest(URL : url)
