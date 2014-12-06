@@ -10,8 +10,42 @@ import CoreData
 
 class User {
 
-    init(username: String) {
+    var name: String?
+    var avatarUrl: String?
+    var id: Int?
+    var money: Int?
+    
+    
+    init() {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
         
+        let userFetch = NSFetchRequest(entityName: "Users")
+        var error: NSError?
+        
+        let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
+        
+        if let results = usersResult {
+            let user = results[results.count - 1]
+            name = user.valueForKey("username") as String!
+            avatarUrl = user.valueForKey("avatar") as String!
+            id = user.valueForKey("id") as Int!
+            //            name = user.valueForKey(key: "money");
+        } else {
+            println("Error")
+        }
+    }
+    
+    func getAvatarUrl() -> String? {
+        return avatarUrl
+    }
+    
+    func getName() -> String? {
+        return name
+    }
+    
+    func getId() -> Int? {
+        return id
     }
 
     class func saveUserInDB(username: String, imageUrl: String, userId: Int?) {
@@ -28,7 +62,7 @@ class User {
 
         var error: NSError?
         if !managedContext.save(&error) {
-            println("err")
+            println("Error while saving the user")
         }
     }
 
@@ -52,17 +86,40 @@ class User {
             // Check if this user was added
             let success = dataString.lowercaseString.rangeOfString(ERROR) == nil;
             if success {
-                self.saveUserInDB(username, imageUrl: imageUrl, userId: dataString.toInt());
-                // Server created a user, save it in CoreData
-                myUser = User(username: username);
+                // User added, now try to set avatar
+                let identifier = dataString.toInt()!
+                
+                let avatarSetUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar/\(imageUrl)"
+                let url: NSURL = NSURL(string: avatarSetUrl)!
+                
+                let request: NSURLRequest = NSURLRequest(URL : url)
+                
+                NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler:{
+                    (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                    var datastring = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    var dataString = String(datastring!)
+
+                    let success = dataString.rangeOfString(imageUrl) != nil;
+                    if success {
+                        self.saveUserInDB(username, imageUrl: imageUrl, userId: identifier);
+                        
+                        myUser = User();
+                    } else {
+                        returnString = dataString
+                    }
+                    // Callback on UI Thread
+                    dispatch_async(dispatch_get_main_queue(),{
+                        closure(error: returnString, user: myUser);
+                    });
+                })
             } else {
                 returnString = dataString
+                // Callback on UI Thread
+                dispatch_async(dispatch_get_main_queue(),{
+                    closure(error: returnString, user: myUser);
+                });
             }
             
-            // Callback on UI Thread
-            dispatch_async(dispatch_get_main_queue(),{
-                closure(error: returnString, user: myUser);
-            });
         })
     }
 
