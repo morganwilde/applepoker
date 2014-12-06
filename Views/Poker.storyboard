@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Jel-VG-Ccf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Jel-VG-Ccf" customClass="Avatar" customModule="ApplePoker" customModuleProvider="target">
                                 <rect key="frame" x="67" y="241" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -122,7 +122,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="mGa-gb-Xrl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="avatarImage" destination="Jel-VG-Ccf" id="ubL-tf-RJF"/>
+                        <outlet property="avatarImage" destination="Jel-VG-Ccf" id="KAM-8Y-hQl"/>
                         <outlet property="moneyLabel" destination="gUB-3p-lTB" id="tey-HH-oGf"/>
                         <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="Mfa-1r-RqG"/>
                     </connections>
