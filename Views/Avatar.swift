@@ -1,5 +1,5 @@
 //
-//  card.swift
+//  Avatar.swift
 //  ApplePoker
 //
 //  Created by Arūnas Seniucas on 12/6/14.
