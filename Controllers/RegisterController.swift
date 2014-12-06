@@ -12,11 +12,12 @@ import UIKit
 class RegisterController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var urlImageTextField: UITextField!
     @IBOutlet weak var registrationButton: UIButton!
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
         let username = textField.text
-        User.createUser( textField.text) { (error, user) -> () in
+        User.createUser(textField.text, imageUrl: urlImageTextField.text, { (error, user) -> () in
             if error.isEmpty {
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
                 var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
@@ -26,13 +27,14 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController( alert, animated: true, completion: nil )
             }
-        }
+        })
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate=self
+        textField.delegate = self
+        urlImageTextField.delegate = self
     }
     
     /*
@@ -43,10 +45,8 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true;
     }
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
     }
-    /*
-    *
-    */
 }
