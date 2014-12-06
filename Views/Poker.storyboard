@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3xU-oW-aTv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -13,6 +13,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="P0V-Ch-mJo" kind="relationship" relationship="rootViewController" id="hFz-hP-vbz"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WFb-Jz-kdX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -21,7 +24,7 @@
         <!--Registration-->
         <scene sceneID="dbg-IL-hS9">
             <objects>
-                <viewController id="P0V-Ch-mJo" sceneMemberID="viewController">
+                <viewController id="P0V-Ch-mJo" customClass="RegisterController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0a-9J-ZLV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,6 +35,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="registrationButtonAction:" destination="P0V-Ch-mJo" eventType="touchUpInside" id="imL-Pc-DY9"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="H9W-ea-3UW">
                                 <rect key="frame" x="78" y="316" width="218" height="30"/>
@@ -51,6 +57,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Registration" id="awi-qw-8ZA"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
+                        <outlet property="textField" destination="H9W-ea-3UW" id="CPE-z9-k2f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -59,7 +69,7 @@
         <!--Profile-->
         <scene sceneID="IqI-W7-6Yd">
             <objects>
-                <viewController title="Profile" id="Dfp-YX-bdm" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dfp-YX-bdm" customClass="ProfileController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u8i-Hl-9hY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,6 +98,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="daH-pY-RP4" kind="push" id="j42-Fw-sy3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
