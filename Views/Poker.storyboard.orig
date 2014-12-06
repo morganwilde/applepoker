@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ewk-mo-wXw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3xU-oW-aTv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="4ZS-f1-20E">
+        <!--Navigation Controller-->
+        <scene sceneID="PWz-F9-ruF">
             <objects>
-<<<<<<< HEAD
                 <navigationController id="3xU-oW-aTv" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rVd-6a-mwi">
@@ -74,6 +73,11 @@
                     <connections>
                         <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
                         <outlet property="textField" destination="H9W-ea-3UW" id="CPE-z9-k2f"/>
+<<<<<<< HEAD
+                        <outlet property="urlImageTextField" destination="RGd-CF-cfS" id="4Tc-Tt-FZr"/>
+=======
+                        <outlet property="urlTextField" destination="RGd-CF-cfS" id="0Kc-vX-2ik"/>
+>>>>>>> 1fd68733aff1a0013870087b10819fbea6840d45
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,6 +117,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="PlayAction:" destination="Dfp-YX-bdm" eventType="touchUpInside" id="lVK-EN-P8T"/>
                                     <segue destination="daH-pY-RP4" kind="push" id="j42-Fw-sy3"/>
                                 </connections>
                             </button>
@@ -121,6 +126,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="mGa-gb-Xrl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="moneyLabel" destination="gUB-3p-lTB" id="RG4-al-ixZ"/>
+                        <outlet property="playButton" destination="9h4-da-IVW" id="m9Y-TC-Xsj"/>
+                        <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="pz5-VL-psN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IJ-hX-1FQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,18 +142,15 @@
                 <viewController id="daH-pY-RP4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CBF-iz-tyj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-=======
-                <viewController id="ewk-mo-wXw" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qTf-Sp-JMg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
->>>>>>> 7bf65f8779c81c7fee1806dbcf0066ebd76b6625
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Game" id="Mkr-6E-G3n"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WUT-F0-BbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YBn-Mh-7eg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="332"/>
+            <point key="canvasLocation" x="1377" y="439"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
