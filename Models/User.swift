@@ -15,7 +15,6 @@ class User {
     var id: Int?
     var money: Int?
     
-    
     init() {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -30,7 +29,7 @@ class User {
             name = user.valueForKey("username") as String!
             avatarUrl = user.valueForKey("avatar") as String!
             id = user.valueForKey("id") as Int!
-            //            name = user.valueForKey(key: "money");
+            money = user.valueForKey("money") as Int!
         } else {
             println("Error couldn't fetch the user from DB")
         }
@@ -47,6 +46,10 @@ class User {
     func getId() -> Int? {
         return id
     }
+    
+    func getMoney() -> Int? {
+        return money
+    }
 
     class func saveUserInDB(username: String, imageUrl: String, userId: Int?) {
         // Save in CoreData
@@ -59,6 +62,7 @@ class User {
         userObject.setValue(username, forKey: "username")
         userObject.setValue(imageUrl, forKey: "avatar")
         userObject.setValue(userId, forKey: "id")
+        userObject.setValue(10000, forKey: "money")
 
         var error: NSError?
         if !managedContext.save(&error) {
@@ -92,7 +96,6 @@ class User {
 //
 //                let fixedImageUrl = imageUrl.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
 //                let fixedUrl = avatarSetUrl + fixedImageUrl!
-                println(avatarSetUrl)
 
                 let url: NSURL = NSURL(string: avatarSetUrl)!
 

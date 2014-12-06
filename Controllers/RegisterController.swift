@@ -29,8 +29,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             }
         })
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
