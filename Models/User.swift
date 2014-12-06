@@ -11,7 +11,7 @@ import CoreData
 class User {
 
     init(username: String) {
-        // Save in core data and create a user
+        
     }
 
     class func saveUserInDB(username: String, imageUrl: String, userId: Int?) {
