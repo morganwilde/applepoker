@@ -13,8 +13,6 @@ import UIKit
 
 class Avatar:UIImageView{
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

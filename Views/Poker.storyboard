@@ -152,48 +152,46 @@
             </objects>
             <point key="canvasLocation" x="936.5" y="438.5"/>
         </scene>
-        <!--Image Controller-->
-        <scene sceneID="9YJ-Mn-Ggz">
+        <!--Table View Controller-->
+        <scene sceneID="PUW-B6-j5E">
             <objects>
-                <tableViewController storyboardIdentifier="ImageTable" id="Am8-Yw-VDv" customClass="ImageController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OLq-WX-ito">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController id="0rF-BD-vjJ" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" id="9NL-U0-zWt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvatarSelectionCell" rowHeight="75" id="ffq-w4-9bR" customClass="AvatarCell" customModule="ApplePoker" customModuleProvider="target">
+                            <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="ttp-zK-uiH">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ffq-w4-9bR" id="oaa-BJ-cBk">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ttp-zK-uiH" id="xzP-ne-vRQ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T5f-Ir-oLv">
-                                            <rect key="frame" x="172" y="22" width="140" height="30"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UWS-nM-GdV">
+                                            <rect key="frame" x="8" y="8" width="89" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8tj-fI-e73">
+                                            <rect key="frame" x="231" y="38" width="136" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Select avatar">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5Pn-6y-A0d">
-                                            <rect key="frame" x="8" y="0.0" width="714" height="222"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Am8-Yw-VDv" id="Y90-yj-alx"/>
-                            <outlet property="delegate" destination="Am8-Yw-VDv" id="SEU-St-4sC"/>
+                            <outlet property="dataSource" destination="0rF-BD-vjJ" id="3hV-x2-En0"/>
+                            <outlet property="delegate" destination="0rF-BD-vjJ" id="Y4h-bU-CYX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Z7A-E0-t2d"/>
-                    <connections>
-                        <outlet property="tableView" destination="OLq-WX-ito" id="vBJ-0g-1E5"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="LAI-9m-oqb"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ecl-Mb-Rp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="98F-Xb-toz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="1302"/>
+            <point key="canvasLocation" x="936.5" y="1215.5"/>
         </scene>
         <!--Game-->
         <scene sceneID="sfM-Wu-0iU">

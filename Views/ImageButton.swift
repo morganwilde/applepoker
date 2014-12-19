@@ -8,4 +8,11 @@
 
 import UIKit
 
-class ImageButton:
+class ImageButton: UIButton{
+    
+    func setInternalImage(imageName: String) -> (){
+        var image = UIImage(named: imageName)
+        self.setImage(image, forState: UIControlState.Normal)
+    }
+    
+}
