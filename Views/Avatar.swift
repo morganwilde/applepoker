@@ -13,26 +13,7 @@ import UIKit
 
 class Avatar:UIImageView{
     
-    var onlineImageStorage: String?
-    var onlineImage: String {
-        get {
-            return onlineImageStorage!
-        }
-        set {
-            onlineImageStorage = newValue
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                //let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
-                
-                let url0 = NSURL(string: newValue)
-                let data = NSData(contentsOfURL: url0!)
-                let timage = UIImage(data: data!)
-                
-                self.image = timage
-                self.setNeedsDisplay()
-            })
-        }
-    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +25,28 @@ class Avatar:UIImageView{
         //fatalError("init(coder:) has not been implemented")
     }
     
-    
+    func Temp() -> (){
+        var onlineImageStorage: String?
+        var onlineImage: String {
+            get {
+                return onlineImageStorage!
+            }
+            set {
+                onlineImageStorage = newValue
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    //let url0 = NSURL(string:"http://whatscookingamerica.net/Vegetables/Russet_Potato.jpg")
+                    
+                    let url0 = NSURL(string: newValue)
+                    let data = NSData(contentsOfURL: url0!)
+                    let timage = UIImage(data: data!)
+                    
+                    self.image = timage
+                    self.setNeedsDisplay()
+                })
+            }
+        }
+    }
     
     
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
