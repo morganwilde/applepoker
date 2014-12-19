@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3xU-oW-aTv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3xU-oW-aTv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -45,15 +45,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7X9-h8-a0E">
-                                <rect key="frame" x="78" y="287" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7X9-h8-a0E">
+                                <rect key="frame" x="78" y="287" width="108" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ypt-lQ-i3p">
-                                <rect key="frame" x="78" y="354" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ypt-lQ-i3p">
+                                <rect key="frame" x="78" y="354" width="89" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -73,11 +73,7 @@
                     <connections>
                         <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
                         <outlet property="textField" destination="H9W-ea-3UW" id="CPE-z9-k2f"/>
-<<<<<<< HEAD
                         <outlet property="urlImageTextField" destination="RGd-CF-cfS" id="4Tc-Tt-FZr"/>
-=======
-                        <outlet property="urlTextField" destination="RGd-CF-cfS" id="0Kc-vX-2ik"/>
->>>>>>> 1fd68733aff1a0013870087b10819fbea6840d45
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,10 +88,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Jel-VG-Ccf">
-                                <rect key="frame" x="67" y="241" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Zc-wK-OBm">
                                 <rect key="frame" x="67" y="377" width="106" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,8 +109,31 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="PlayAction:" destination="Dfp-YX-bdm" eventType="touchUpInside" id="lVK-EN-P8T"/>
                                     <segue destination="daH-pY-RP4" kind="push" id="j42-Fw-sy3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="insert_user" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fbl-n2-aAb">
+                                <rect key="frame" x="211" y="377" width="96" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="insert_cash" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tny-kn-RC3">
+                                <rect key="frame" x="211" y="406" width="96" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e0Z-8g-HkS">
+                                <rect key="frame" x="59" y="113" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="avatar_0">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="imageAction:" destination="Dfp-YX-bdm" eventType="touchUpInside" id="hG0-vD-Ham"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -127,14 +142,60 @@
                     <navigationItem key="navigationItem" title="Profile" id="mGa-gb-Xrl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="moneyLabel" destination="gUB-3p-lTB" id="RG4-al-ixZ"/>
-                        <outlet property="playButton" destination="9h4-da-IVW" id="m9Y-TC-Xsj"/>
-                        <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="pz5-VL-psN"/>
+                        <outlet property="cashText" destination="tny-kn-RC3" id="LgG-em-NLt"/>
+                        <outlet property="moneyLabel" destination="gUB-3p-lTB" id="tey-HH-oGf"/>
+                        <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="Mfa-1r-RqG"/>
+                        <outlet property="userNameText" destination="fbl-n2-aAb" id="jBg-91-Sic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IJ-hX-1FQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="439"/>
+            <point key="canvasLocation" x="936.5" y="438.5"/>
+        </scene>
+        <!--Image Controller-->
+        <scene sceneID="9YJ-Mn-Ggz">
+            <objects>
+<<<<<<< HEAD
+                <tableViewController storyboardIdentifier="ImageTable" id="Am8-Yw-VDv" customClass="ImageController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ImageTable" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OLq-WX-ito">
+=======
+                <tableViewController id="Am8-Yw-VDv" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="OLq-WX-ito">
+>>>>>>> master
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvatarSelectionCell" rowHeight="75" id="ffq-w4-9bR" customClass="AvatarCell" customModule="ApplePoker" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ffq-w4-9bR" id="oaa-BJ-cBk">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T5f-Ir-oLv">
+                                            <rect key="frame" x="172" y="22" width="140" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Select avatar">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5Pn-6y-A0d">
+                                            <rect key="frame" x="8" y="0.0" width="74" height="74"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Am8-Yw-VDv" id="Y90-yj-alx"/>
+                            <outlet property="delegate" destination="Am8-Yw-VDv" id="SEU-St-4sC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Z7A-E0-t2d"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ecl-Mb-Rp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="936" y="1302"/>
         </scene>
         <!--Game-->
         <scene sceneID="sfM-Wu-0iU">
@@ -153,6 +214,9 @@
             <point key="canvasLocation" x="1377" y="439"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="avatar_0" width="256" height="256"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
