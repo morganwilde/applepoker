@@ -28,7 +28,7 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let url = appDelegate.currentUser!.avatarUrl!
+        let url = appDelegate.currentUser!.avatar!
         //println(avatarImage)
         //avatarImage.onlineImage = url
         //moneyLabel.text = AppDelegate.cur
