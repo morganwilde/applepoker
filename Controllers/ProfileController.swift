@@ -12,18 +12,19 @@ import UIKit
 class ProfileController: UIViewController {
     
     
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var avatarImage: Avatar!
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let url = appDelegate.currentUser!.getAvatarUrl()!
+        //println(avatarImage)
+        avatarImage.onlineImage = url
+        //moneyLabel.text = AppDelegate.cur
+        userNameLabel.text = appDelegate.currentUser?.getName()
     }
     
-    @IBAction func PlayAction(sender: UIButton) {
-        
-        
-    }
 }
