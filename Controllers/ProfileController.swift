@@ -39,8 +39,8 @@ class ProfileController: UIViewController {
     
     func updateAvatar() {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let name = appDelegate.currentUser!.name
-        imgButton.setInternalImage(name!)
+        let filename = appDelegate.currentUser!.avatar?.filename
+        imgButton.setInternalImage(filename!)
     }
     
 }

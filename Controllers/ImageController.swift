@@ -32,7 +32,7 @@ class ImageController: UITableViewController, UITableViewDelegate, UITableViewDa
         
         //println("You selected cell #\(avatars[indexPath.row].avatarId)!")
         if let navigation = navigationController {
-            if let profileController = navigation.viewControllers[navigation.viewControllers.count - 1] as? ProfileController {
+            if let profileController = navigation.viewControllers[navigation.viewControllers.count - 2] as? ProfileController {
                 let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
                 appDelegate.currentUser?.updateAvatar(avatars[indexPath.row].avatarId)
                 //model update avatar
