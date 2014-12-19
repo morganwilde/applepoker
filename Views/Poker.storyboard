@@ -126,7 +126,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e0Z-8g-HkS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e0Z-8g-HkS" customClass="ImageButton" customModule="ApplePoker" customModuleProvider="target">
                                 <rect key="frame" x="59" y="113" width="256" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="avatar_0">
@@ -143,6 +143,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="cashText" destination="tny-kn-RC3" id="LgG-em-NLt"/>
+                        <outlet property="imgButton" destination="e0Z-8g-HkS" id="moE-e2-Dcx"/>
                         <outlet property="moneyLabel" destination="gUB-3p-lTB" id="tey-HH-oGf"/>
                         <outlet property="userNameLabel" destination="0Zc-wK-OBm" id="Mfa-1r-RqG"/>
                         <outlet property="userNameText" destination="fbl-n2-aAb" id="jBg-91-Sic"/>

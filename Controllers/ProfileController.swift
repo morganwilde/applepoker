@@ -23,6 +23,7 @@ class ProfileController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameText: UILabel!
     @IBOutlet weak var cashText: UILabel!
+    @IBOutlet weak var imgButton: ImageButton!
     
     
     override func viewDidLoad() {
@@ -34,6 +35,12 @@ class ProfileController: UIViewController {
         //moneyLabel.text = AppDelegate.cur
         userNameLabel.text = appDelegate.currentUser?.name
         
+    }
+    
+    func updateAvatar() {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let name = appDelegate.currentUser!.name
+        imgButton.setInternalImage(name!)
     }
     
 }

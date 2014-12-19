@@ -29,6 +29,20 @@ class ImageController: UITableViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        println("You selected cell #\(avatars[indexPath.row].avatarId)!")
+        
+        //println("You selected cell #\(avatars[indexPath.row].avatarId)!")
+        if let navigation = navigationController {
+            if let profileController = navigation.viewControllers[navigation.viewControllers.count - 1] as? ProfileController {
+                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                appDelegate.currentUser?.updateAvatar(avatars[indexPath.row].avatarId)
+                //model update avatar
+                
+                profileController.updateAvatar()
+            }
+            navigation.popViewControllerAnimated(true)
+            
+        }
+        
+        
     }
 }
