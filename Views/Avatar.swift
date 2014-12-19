@@ -13,6 +13,19 @@ import UIKit
 
 class Avatar:UIImageView{
     
+    var avatar_name: String = ""
+    
+    var onlineImage: String {
+        get {
+            return avatar_name
+        }
+        set {
+            avatar_name = newValue
+            self.setNeedsDisplay()
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -20,6 +33,10 @@ class Avatar:UIImageView{
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        self.image = UIImage(named: avatar_name)
+        
+        
         //fatalError("init(coder:) has not been implemented")
     }
     
