@@ -8,4 +8,10 @@
 
 import UIKit
 
-class ImageButton:
+class ImageButton: UIButton{
+    
+    func setImage(imageName: String) -> (){
+        
+    }
+    
+}
