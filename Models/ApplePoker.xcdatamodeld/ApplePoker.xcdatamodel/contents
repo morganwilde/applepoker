@@ -7,10 +7,11 @@
         <attribute name="avatarId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="money" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Users" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Avatars" positionX="-27" positionY="45" width="128" height="58"/>
     </elements>
 </model>

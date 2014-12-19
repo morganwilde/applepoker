@@ -21,7 +21,7 @@ class User {
     var id: Int?
     var money: Int?
     
-    init(username: String, avatarId: Int, id: Int, money: Int) {
+    init(username: String, password: String, avatarId: Int, id: Int, money: Int) {
         name = username
         self.id = id
         self.money = money
@@ -96,7 +96,7 @@ class User {
         return managedContext.executeFetchRequest(userFetch, error: error) as [NSManagedObject]?
     }
     
-    class func saveUserInDB(bigUsername: String, avatarId: Int, userId: Int?) {
+    class func saveUserInDB(bigUsername: String, password: String, avatarId: Int, userId: Int?) {
         let username = bigUsername.lowercaseString
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -105,6 +105,7 @@ class User {
         let userObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         userObject.setValue(username, forKey: "username")
+        userObject.setValue(username, forKey: "password")
         userObject.setValue(avatarId, forKey: "avatarId")
         userObject.setValue(userId, forKey: "id")
         userObject.setValue(Cash.INITIAL.rawValue, forKey: "money")
@@ -166,7 +167,13 @@ class User {
         })
     }
     
-    class func createUser(bigUsername: String, avatarId: Int = 0, callback: ((error: String, user: User?) -> ())) -> Void {
+    class func createUser(bigUsername: String, password: String, avatarId: Int = 0, callback: ((error: String, user: User?) -> ())) -> Void {
+        if bigUsername.isEmpty {
+            callback(error: "Username cannot be empty!", user: nil);
+        } else if password.isEmpty {
+            callback(error: "Password cannot be empty!", user: nil);
+        }
+        
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
         let queue: NSOperationQueue = NSOperationQueue()
@@ -190,8 +197,8 @@ class User {
                 // User registered, now set the avatar
                 let identifier = addResult.toInt()!
                 
-                self.saveUserInDB(username, avatarId: avatarId, userId: identifier);
-                myUser = User(username: username, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
+                self.saveUserInDB(username, password: password, avatarId: avatarId, userId: identifier);
+                myUser = User(username: username, password: password, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
             } else {
                 returnString = addResult
                 // Callback on UI Thread
