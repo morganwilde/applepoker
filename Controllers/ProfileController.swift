@@ -12,9 +12,13 @@ import UIKit
 class ProfileController: UIViewController {
     
     
-    @IBOutlet weak var avatarImage: Avatar!
+    @IBAction func ImageAction(sender: UIButton) {
+        
+    }
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userNameText: UILabel!
+    @IBOutlet weak var cashText: UILabel!
     
     
     override func viewDidLoad() {
