@@ -59,7 +59,7 @@ class AvatarModel {
         let userObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         for i in 0...4 {
-            userObject.setValue("\(i)", forKey: "id")
+            userObject.setValue(i, forKey: "id")
         }
         
         var error: NSError?
