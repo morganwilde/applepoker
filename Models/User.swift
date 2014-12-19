@@ -17,13 +17,13 @@ class User {
     }
     
     var name: String?
-    var avatarId: Int?
+    var avatar: AvatarModel?
     var id: Int?
     var money: Int?
     
-    init(username: String, avatarId: Int, id: Int, money: Int) {
+    init(username: String, avatar: AvatarModel, id: Int, money: Int) {
         name = username
-        self.avatarId = avatarId
+        self.avatar = avatar
         self.id = id
         self.money = money
     }
@@ -40,7 +40,11 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                avatarId = userData.valueForKey("avatarId") as? Int
+                if let avatarId = userData.valueForKey("avatarId") as? Int {
+                    avatar = AvatarModel(avatarId: avatarId)
+                } else {
+                    // throw
+                }
                 id = userData.valueForKey("id") as Int?
                 println("User exists in CoreData, id='\(id)'")
                 println("User exists in CoreData, name='\(name)'")
@@ -64,7 +68,11 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                avatarId = userData.valueForKey("avatarId") as? Int
+                if let avatarId = userData.valueForKey("avatarId") as? Int {
+                    avatar = AvatarModel(avatarId: avatarId)
+                } else {
+                    // throw
+                }
                 id = userData.valueForKey("id") as? Int
                 money = userData.valueForKey("money") as? Int
             } else {
@@ -195,7 +203,8 @@ class User {
                     let success = avatarResult.rangeOfString("\(avatarId)") != nil;
                     if success {
                         self.saveUserInDB(username, avatarId: avatarId, userId: identifier);
-                        myUser = User(username: username, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
+                        let avatar = AvatarModel(avatarId: avatarId)
+                        myUser = User(username: username, avatar: avatar, id: identifier, money: Cash.INITIAL.rawValue);
                     } else {
                         returnString = avatarResult
                     }

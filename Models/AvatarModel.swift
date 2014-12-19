@@ -12,31 +12,40 @@ import CoreData
 
 class AvatarModel {
     
-    class func getAvatars() -> [(String, Int)] {
+    var avatarId : Int
+    var filename : String
+    
+    init(avatarId : Int) {
         var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var results : [(String, Int)] = []
-
         if let prefix = defaults.stringForKey("avatar_prefix") {
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            let managedContext = appDelegate.managedObjectContext!
-            let avatarsFetch = NSFetchRequest(entityName: "Avatars")
-            
-            var error: NSError?
-
-            if let avatars = managedContext.executeFetchRequest(avatarsFetch, error: &error) as [NSManagedObject]? {
-                if let errorNotNil = error {
-                    NSException(name: "Avatar exception", reason: "Fetching avatar from DB returned: \(errorNotNil)", userInfo: nil).raise()
-                }
-                for avatar in avatars {
-                    let avatarId = avatar.valueForKey("id")! as Int
-                    results += [("\(prefix)_\(avatarId).png", avatarId)]
-                }
-                return results
-            } else {
-                NSException(name: "Avatar exception", reason: "Fetching avatar ids failed", userInfo: nil).raise()
-            }
+            self.avatarId = avatarId
+            self.filename = "\(prefix)_\(avatarId).png"
         } else {
+            self.avatarId = -1
+            self.filename = ""
             NSException(name: "Avatar exception", reason: "Prefix not found", userInfo: nil).raise()
+        }
+    }
+    
+    class func getAvatars() -> [AvatarModel] {
+        var results : [AvatarModel] = []
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let avatarsFetch = NSFetchRequest(entityName: "Avatars")
+        
+        var error: NSError?
+
+        if let avatars = managedContext.executeFetchRequest(avatarsFetch, error: &error) as [NSManagedObject]? {
+            if let errorNotNil = error {
+                NSException(name: "Avatar exception", reason: "Fetching avatar from DB returned: \(errorNotNil)", userInfo: nil).raise()
+            }
+            for avatar in avatars {
+                let avatarId = avatar.valueForKey("id")! as Int
+                results += [AvatarModel(avatarId: avatarId)]
+            }
+            return results
+        } else {
+            NSException(name: "Avatar exception", reason: "Fetching avatar ids failed", userInfo: nil).raise()
         }
         
         return results
