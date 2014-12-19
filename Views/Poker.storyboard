@@ -174,7 +174,7 @@
                                             </state>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5Pn-6y-A0d">
-                                            <rect key="frame" x="8" y="0.0" width="394" height="148"/>
+                                            <rect key="frame" x="8" y="0.0" width="714" height="222"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
@@ -187,6 +187,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Z7A-E0-t2d"/>
+                    <connections>
+                        <outlet property="tableView" destination="OLq-WX-ito" id="vBJ-0g-1E5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ecl-Mb-Rp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

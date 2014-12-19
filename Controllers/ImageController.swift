@@ -11,8 +11,12 @@ import UIKit
 
 class ImageController: UITableViewController, UITableViewDelegate{
     
+    
     override func viewDidLoad() {
-         super.viewDidLoad()
+        super.viewDidLoad()
+        
+        self.tableView.registerClass(UITableViewCell.self, forHeaderFooterViewReuseIdentifier: "imageCell")
+        
         
         
     }
