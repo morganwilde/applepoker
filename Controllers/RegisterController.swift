@@ -19,7 +19,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
         let username = textField.text
-        User.createUser(textField.text, imageUrl: urlImageTextField.text, { (error, user) -> () in
+        User.createUser(textField.text, callback: { (error, user) -> () in
             if error.isEmpty {
                 
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)

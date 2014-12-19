@@ -9,17 +9,26 @@
 import Foundation
 import UIKit
 
-class ImageController: UITableViewController, UITableViewDelegate{
-    
+class ImageController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+
+    let avatars = AvatarModel.getAvatars()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.registerClass(UITableViewCell.self, forHeaderFooterViewReuseIdentifier: "imageCell")
+        //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return avatars.count
+    }
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as AvatarCellController
+        cell.avatarImage?.image = UIImage(named: self.avatars[indexPath.row].filename)
         
-        
-        
+        return cell
     }
     
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        println("You selected cell #\(avatars[indexPath.row].avatarId)!")
+    }
 }

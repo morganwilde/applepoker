@@ -152,16 +152,16 @@
             </objects>
             <point key="canvasLocation" x="936.5" y="438.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Image Controller-->
         <scene sceneID="PUW-B6-j5E">
             <objects>
-                <tableViewController id="0rF-BD-vjJ" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ImageTable" id="0rF-BD-vjJ" customClass="ImageController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" id="9NL-U0-zWt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="ttp-zK-uiH">
+                            <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="106" id="ttp-zK-uiH" customClass="AvatarCellController" customModule="ApplePoker" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ttp-zK-uiH" id="xzP-ne-vRQ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -179,6 +179,10 @@
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImage" destination="UWS-nM-GdV" id="eeP-OA-XsJ"/>
+                                    <outlet property="selectorButton" destination="8tj-fI-e73" id="Iqq-dx-vkU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
