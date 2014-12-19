@@ -12,11 +12,19 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    
     var window: UIWindow?
     var currentUser: User?
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        println("App started")
+        defaults.setObject("avatar_", forKey: "avatar_prefix")
+        defaults.synchronize()
+
+        AvatarModel.createAvatars()
+        
         // Override point for customization after application launch.
         return true
     }

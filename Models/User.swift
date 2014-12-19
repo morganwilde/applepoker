@@ -4,6 +4,7 @@
 //  Created by Simas Abramovas on 12/6/14.
 //  Copyright (c) 2014 Simas Abramovas. All rights reserved.
 
+import Foundation
 import UIKit
 import CoreData
 
@@ -16,13 +17,13 @@ class User {
     }
     
     var name: String?
-    var avatarUrl: String?
+    var avatarId: Int?
     var id: Int?
     var money: Int?
     
-    init(username: String, imageUrl: String, id: Int, money: Int) {
-        name = username;
-        avatarUrl = imageUrl
+    init(username: String, avatarId: Int, id: Int, money: Int) {
+        name = username
+        self.avatarId = avatarId
         self.id = id
         self.money = money
     }
@@ -39,17 +40,17 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                avatarUrl = userData.valueForKey("avatar") as? String
+                avatarId = userData.valueForKey("avatarId") as? Int
                 id = userData.valueForKey("id") as Int?
                 println("User exists in CoreData, id='\(id)'")
                 println("User exists in CoreData, name='\(name)'")
                 println("Looked for , username='\(username)'")
                 money = userData.valueForKey("money") as? Int
             } else {
-                println("Error while fetching the user (name: \(username)) from DB. It wasn't found.")
+                NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
-            println("Error while fetching the user (name: \(username)) from DB \(error?)")
+            NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB \(error?)", userInfo: nil).raise()
         }
     }
     
@@ -63,14 +64,14 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                avatarUrl = userData.valueForKey("avatar") as? String
+                avatarId = userData.valueForKey("avatarId") as? Int
                 id = userData.valueForKey("id") as? Int
                 money = userData.valueForKey("money") as? Int
             } else {
-                println("Error while fetching the user (name: \(userId)) from DB. It wasn't found.")
+                NSException(name: "User exception", reason: "Couldn't fetch user (name: \(userId)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
-            println("Error couldn't fetch the user (id: \(userId)) from DB \(error?)")
+            NSException(name: "User exception", reason: "Couldn't fetch user (id: \(userId)) from DB \(error?)", userInfo: nil).raise()
         }
     }
     
@@ -87,7 +88,7 @@ class User {
         return managedContext.executeFetchRequest(userFetch, error: error) as [NSManagedObject]?
     }
     
-    class func saveUserInDB(bigUsername: String, imageUrl: String, userId: Int?) {
+    class func saveUserInDB(bigUsername: String, avatarId: Int, userId: Int?) {
         let username = bigUsername.lowercaseString
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -96,13 +97,13 @@ class User {
         let userObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         userObject.setValue(username, forKey: "username")
-        userObject.setValue(imageUrl, forKey: "avatar")
+        userObject.setValue(avatarId, forKey: "avatarId")
         userObject.setValue(userId, forKey: "id")
         userObject.setValue(Cash.INITIAL.rawValue, forKey: "money")
         
         var error: NSError?
         if !managedContext.save(&error) {
-            println("Error while saving the user (name: \(username): \(error?)")
+            NSException(name: "User exception", reason: "Couldn't save user (name: \(username): \(error?)", userInfo: nil).raise()
         }
     }
     
@@ -123,13 +124,13 @@ class User {
             if (results.count > 0) {
                 managedContext.deleteObject(results[0])
             } else {
-                println("Error while fetching the user (id: \(id)) from DB. It wasn't found.")
+                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
-            println("Failed to fetch the user (id: \(id)) from DB for deletion.")
+            NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB for deletion.", userInfo: nil).raise()
         }
         if (!managedContext.save(&error)) {
-            println("Failed to delete user (id: \(id)) from DB \(error?)")
+            NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB \(error?)", userInfo: nil).raise()
         }
         
         // Delete from server
@@ -157,7 +158,7 @@ class User {
         })
     }
     
-    class func createUser(bigUsername: String, imageUrl: String, callback: ((error: String, user: User?) -> ())) -> Void {
+    class func createUser(bigUsername: String, avatarId: Int = 0, callback: ((error: String, user: User?) -> ())) -> Void {
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
         let queue: NSOperationQueue = NSOperationQueue()
@@ -167,8 +168,8 @@ class User {
         
         // Try to register
         let userAddUrl = "http://applepoker.herokuapp.com/user/\(username)/add"
-        let url: NSURL = NSURL(string: userAddUrl)!
-        let request: NSURLRequest = NSURLRequest(URL : url)
+        let userAddURL: NSURL = NSURL(string: userAddUrl)!
+        let request: NSURLRequest = NSURLRequest(URL : userAddURL)
         
         NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler: {
             (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -181,9 +182,9 @@ class User {
                 // User registered, now set the avatar
                 let identifier = addResult.toInt()!
                 
-                let avatarSetUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar?url=\(imageUrl)"
-                let url: NSURL = NSURL(string: avatarSetUrl)!
-                let request: NSURLRequest = NSURLRequest(URL : url)
+                let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar?url=\(avatarId)"
+                let avatarSetterURL: NSURL = NSURL(string: avatarSetterUrl)!
+                let request: NSURLRequest = NSURLRequest(URL : avatarSetterURL)
                 
                 NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler: {
                     (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -191,10 +192,10 @@ class User {
                     let avatarResult = String(avatarReturn!)
                     
                     // Check if returned the same img url
-                    let success = avatarResult.rangeOfString(imageUrl) != nil;
+                    let success = avatarResult.rangeOfString("\(avatarId)") != nil;
                     if success {
-                        self.saveUserInDB(username, imageUrl: imageUrl, userId: identifier);
-                        myUser = User(username: username, imageUrl: imageUrl, id: identifier, money: Cash.INITIAL.rawValue);
+                        self.saveUserInDB(username, avatarId: avatarId, userId: identifier);
+                        myUser = User(username: username, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
                     } else {
                         returnString = avatarResult
                     }
