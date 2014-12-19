@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
-class ImageController: UITableView {
+class ImageController: UITableViewController, UITableViewDelegate{
     
+    override func viewDidLoad() {
+         super.viewDidLoad()
+        
+        
+    }
     
     
 }

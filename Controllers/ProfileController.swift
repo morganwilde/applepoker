@@ -12,7 +12,11 @@ import UIKit
 class ProfileController: UIViewController {
     
     
-    @IBAction func ImageAction(sender: UIButton) {
+    @IBAction func imageAction(sender: UIButton) {
+        
+        let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
+        var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as ImageController
+        self.navigationController?.pushViewController(image, animated: true)
         
     }
     @IBOutlet weak var moneyLabel: UILabel!
@@ -29,6 +33,7 @@ class ProfileController: UIViewController {
         //avatarImage.onlineImage = url
         //moneyLabel.text = AppDelegate.cur
         userNameLabel.text = appDelegate.currentUser?.name
+        
     }
     
 }
