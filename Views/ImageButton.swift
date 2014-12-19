@@ -10,8 +10,9 @@ import UIKit
 
 class ImageButton: UIButton{
     
-    func setImage(imageName: String) -> (){
-        
+    func setInternalImage(imageName: String) -> (){
+        var image = UIImage(named: imageName, forState:UIControlState.Normal)
+        self.setImage(image)
     }
     
 }
