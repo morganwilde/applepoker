@@ -43,13 +43,15 @@ class AvatarModel {
                 let avatarId = avatar.valueForKey("id")! as Int
                 results += [AvatarModel(avatarId: avatarId)]
             }
+
+            results.sort { (model1, model2) -> Bool in
+                return model1.avatarId < model2.avatarId
+            }
             return results
         } else {
             NSException(name: "Avatar exception", reason: "Fetching avatar ids failed", userInfo: nil).raise()
         }
-        results.sort { (model1, model2) -> Bool in
-            return model1.avatarId > model2.avatarId
-        }
+
         return results
     }
     

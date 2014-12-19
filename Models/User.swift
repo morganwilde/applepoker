@@ -21,11 +21,11 @@ class User {
     var id: Int?
     var money: Int?
     
-    init(username: String, avatar: AvatarModel, id: Int, money: Int) {
+    init(username: String, avatarId: Int, id: Int, money: Int) {
         name = username
-        self.avatar = avatar
         self.id = id
         self.money = money
+        updateAvatar(avatarId)
     }
     
     init(bigUsername: String) {
@@ -190,35 +190,39 @@ class User {
                 // User registered, now set the avatar
                 let identifier = addResult.toInt()!
                 
-                let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(identifier)/update/avatar?url=\(avatarId)"
-                let avatarSetterURL: NSURL = NSURL(string: avatarSetterUrl)!
-                let request: NSURLRequest = NSURLRequest(URL : avatarSetterURL)
-                
-                NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler: {
-                    (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-                    let avatarReturn = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    let avatarResult = String(avatarReturn!)
-                    
-                    // Check if returned the same img url
-                    let success = avatarResult.rangeOfString("\(avatarId)") != nil;
-                    if success {
-                        self.saveUserInDB(username, avatarId: avatarId, userId: identifier);
-                        let avatar = AvatarModel(avatarId: avatarId)
-                        myUser = User(username: username, avatar: avatar, id: identifier, money: Cash.INITIAL.rawValue);
-                    } else {
-                        returnString = avatarResult
-                    }
-                    // Callback on UI Thread
-                    dispatch_async(dispatch_get_main_queue(), {
-                        callback(error: returnString, user: myUser);
-                    });
-                })
+                self.saveUserInDB(username, avatarId: avatarId, userId: identifier);
+                myUser = User(username: username, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
             } else {
                 returnString = addResult
                 // Callback on UI Thread
                 dispatch_async(dispatch_get_main_queue(), {
                     callback(error: returnString, user: myUser);
                 });
+            }
+            // Callback on UI thread with the new user
+            dispatch_async(dispatch_get_main_queue(), {
+                callback(error: returnString, user: myUser);
+            });
+        })
+    }
+    
+    func updateAvatar(avatarId : Int) {
+        self.avatar = AvatarModel(avatarId: avatarId)
+        
+        // Avatar request for server
+        let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(id!)/update/avatar?url=\(avatarId)"
+        let avatarSetterURL: NSURL = NSURL(string: avatarSetterUrl)!
+        let request: NSURLRequest = NSURLRequest(URL : avatarSetterURL)
+        
+        let queue: NSOperationQueue = NSOperationQueue()
+        NSURLConnection.sendAsynchronousRequest(request, queue : queue, completionHandler: {
+            (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            let avatarReturn = NSString(data: data, encoding: NSUTF8StringEncoding)
+            let serverResult = String(avatarReturn!)
+            
+            // Check if returned the same img url
+            if serverResult.rangeOfString("\(avatarId)") == nil {
+                NSException(name: "User exception", reason: "Server failed when setting the avatar id: \(serverResult) when calling \(avatarSetterURL)", userInfo: nil).raise()
             }
         })
     }
