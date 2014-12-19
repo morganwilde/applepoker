@@ -20,11 +20,11 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let url = appDelegate.currentUser!.getAvatarUrl()!
+        let url = appDelegate.currentUser!.avatarUrl!
         //println(avatarImage)
-        avatarImage.onlineImage = url
+        //avatarImage.onlineImage = url
         //moneyLabel.text = AppDelegate.cur
-        userNameLabel.text = appDelegate.currentUser?.getName()
+        userNameLabel.text = appDelegate.currentUser?.name
     }
     
 }
