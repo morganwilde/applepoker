@@ -19,7 +19,7 @@ class AvatarModel {
         var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if let prefix = defaults.stringForKey("avatar_prefix") {
             self.avatarId = avatarId
-            self.filename = "\(prefix)_\(avatarId).png"
+            self.filename = "\(prefix)\(avatarId).png"
         } else {
             self.avatarId = -1
             self.filename = ""
@@ -52,6 +52,10 @@ class AvatarModel {
     }
     
     class func createAvatars() {
+        // Dont create avatars if they exist
+        if getAvatars().count > 0 {
+            return
+        }
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         

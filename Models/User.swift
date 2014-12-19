@@ -43,7 +43,7 @@ class User {
                 if let avatarId = userData.valueForKey("avatarId") as? Int {
                     avatar = AvatarModel(avatarId: avatarId)
                 } else {
-                    // throw
+                    NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB. This username wasn't found?", userInfo: nil).raise()
                 }
                 id = userData.valueForKey("id") as Int?
                 println("User exists in CoreData, id='\(id)'")
