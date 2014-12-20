@@ -28,7 +28,8 @@ class ProfileController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         userNameLabel.text = appDelegate.currentUser!.name
         
-        
+        var borders = CustomBorderView(drawWithin: view, passingFrame: imgButton.frame)
+        view.insertSubview(borders, belowSubview: self.imgButton)
         updateAvatar()
         let beforeMoney = appDelegate.currentUser!.money! / 100
         let afterMoney = appDelegate.currentUser!.money! % 100
