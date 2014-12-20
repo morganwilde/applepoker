@@ -107,8 +107,38 @@ class User {
         }
     }
     
-    class func updateUserInDB(bigUsername: String = "", password: String = "", avatarId: Int, userId: Int?) {
+    func updateUserInDB(username: String = "", password: String = "", avatarId: Int = -1) {
+        var error: NSError?
         
+        // Delete from CoreData
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        let userFetch = NSFetchRequest(entityName: "Users")
+        userFetch.predicate = NSPredicate(format: "id == '\(id?)'")
+        
+        let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
+        
+        if let results = usersResult {
+            if (results.count > 0) {
+                if !username.isEmpty {
+                    managedContext.setValue(username, forKey: "username")
+                }
+                if !password.isEmpty {
+                    managedContext.setValue(password, forKey: "password")
+                }
+                if avatarId != -1 {
+                    managedContext.setValue(avatarId, forKey: "avatarId")
+                }
+            } else {
+                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
+            }
+        } else {
+            NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB for updating.", userInfo: nil).raise()
+        }
+        if (!managedContext.save(&error)) {
+            NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB \(error?)", userInfo: nil).raise()
+        }
     }
     
     class func removeUser(id: Int, callback: ((error: String) -> ())) {
@@ -238,8 +268,8 @@ class User {
     }
     
     func updateAvatar(avatarId : Int) {
-        self.avatar = AvatarModel(avatarId: avatarId)
-        
+        avatar = AvatarModel(avatarId: avatarId)
+//        updateUserInDB(avatarId: avatarId)
         
         // Avatar request for server
         let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(id!)/update/avatar?url=\(avatarId)"
