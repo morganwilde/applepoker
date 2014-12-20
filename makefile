@@ -14,3 +14,4 @@ model:
 	git pull origin master
 	git checkout model
 	git merge master
+	git push origin model
