@@ -13,28 +13,42 @@ class ProfileController: UIViewController {
     
     
     @IBAction func imageAction(sender: UIButton) {
-        
         let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
         var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as ImageController
         self.navigationController?.pushViewController(image, animated: true)
-        
     }
 
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userNameText: UILabel!
-    @IBOutlet weak var cashText: UILabel!
     @IBOutlet weak var imgButton: ImageButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let url = appDelegate.currentUser!.avatar!
-        //println(avatarImage)
-        //avatarImage.onlineImage = url
-        //moneyLabel.text = AppDelegate.cur
-        userNameLabel.text = appDelegate.currentUser?.name
+        userNameLabel.text = appDelegate.currentUser!.name
+        
+        var borders = CustomBorderView(drawWithin: view, passingFrame: imgButton.frame)
+        view.insertSubview(borders, belowSubview: self.imgButton)
+        updateAvatar()
+        let beforeMoney = appDelegate.currentUser!.money! / 100
+        let afterMoney = appDelegate.currentUser!.money! % 100
+        if afterMoney == 0 {
+            moneyLabel.text = "$ \(beforeMoney).\(afterMoney)0"
+        }
+        else{
+            moneyLabel.text = "$ \(beforeMoney).\(afterMoney)"
+        }
+        
+        //LAYOUT
+        
+        let screenSize : CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        userNameLabel.frame.origin.x = screenWidth/2 - userNameLabel.frame.width/2
+        
+        
         
     }
     
@@ -45,14 +59,6 @@ class ProfileController: UIViewController {
         navigationItem.hidesBackButton = true;
     }
     
-    /*override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.leftBarButtonItem = nil;
-        navigationItem.hidesBackButton = true;
-        
-    }*/
-    
     func updateAvatar() {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let filename = appDelegate.currentUser!.avatar?.filename
@@ -62,6 +68,5 @@ class ProfileController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
-        //navigationItem.setHidesBackButton(false, animated: false)
     }
 }

@@ -1,18 +1,26 @@
 //
-//  GameTable.swift
-//  ApplePoker
+//  CustomView.swift
+//  Home1
 //
-//  Created by Arūnas Seniucas on 12/6/14.
+//  Created by Arūnas Seniucas on 11/22/14.
 //  Copyright (c) 2014 Arūnas Seniucas. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class GameTable: UIView {
+class CustomView: UIView{
     var background = UIBezierPath()
     
+    //project settings - launch horizontally
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clearColor()
+    }
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func drawRect(rect: CGRect) {
         var ovalPath = UIBezierPath(ovalInRect: rect)

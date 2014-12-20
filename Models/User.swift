@@ -191,8 +191,11 @@ class User {
             callback(error: "Password cannot be empty!", user: nil);
         }
         
-        // ToDo password/bigUsername regex #$%^&*(OP
-        
+        // Check for incorrect username/password
+        let bigUsernameTest = bigUsername.removeSpaces()
+        let passwordTest = password.removeSpaces()
+        Regex("^\\w+$").test(bigUsernameTest)
+        Regex("^\\w+$").test(passwordTest)
         
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
