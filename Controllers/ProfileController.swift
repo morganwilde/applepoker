@@ -29,8 +29,12 @@ class ProfileController: UIViewController {
         userNameLabel.text = appDelegate.currentUser!.name
         let beforeMoney = appDelegate.currentUser!.money! / 100
         let afterMoney = appDelegate.currentUser!.money! % 100
-        moneyLabel.text = "$ \(beforeMoney).\(afterMoney)"
-        
+        if afterMoney == 0 {
+            moneyLabel.text = "$ \(beforeMoney).\(afterMoney)0"
+        }
+        else{
+            moneyLabel.text = "$ \(beforeMoney).\(afterMoney)"
+        }
         //LAYOUT
         
         
