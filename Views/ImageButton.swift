@@ -10,8 +10,6 @@ import UIKit
 
 class ImageButton: UIButton{
     
-    
-    
     func setInternalImage(imageName: String) -> (){
         
         self.layer.cornerRadius = 10
@@ -19,6 +17,8 @@ class ImageButton: UIButton{
         self.setImage(image, forState: UIControlState.Normal)
         self.setNeedsDisplay()
     }
+    
+    
     
     /*tautvydui idet i registration controlleri
     
