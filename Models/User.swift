@@ -40,18 +40,12 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                if let avatarId = userData.valueForKey("avatarId") as? Int {
-                    avatar = AvatarModel(avatarId: avatarId)
-                } else {
-                    NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB. This username wasn't found?", userInfo: nil).raise()
-                }
+                let avatarId = userData.valueForKey("avatarId") as Int
+                avatar = AvatarModel(avatarId: avatarId)
                 id = userData.valueForKey("id") as Int?
-                println("User exists in CoreData, id='\(id)'")
-                println("User exists in CoreData, name='\(name)'")
-                println("Looked for , username='\(username)'")
                 money = userData.valueForKey("money") as? Int
             } else {
-                NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB. It wasn't found.", userInfo: nil).raise()
+//                NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (name: \(username)) from DB \(error?)", userInfo: nil).raise()
@@ -68,15 +62,12 @@ class User {
             if results.count > 0 {
                 let userData = results[0]
                 name = userData.valueForKey("username") as? String
-                if let avatarId = userData.valueForKey("avatarId") as? Int {
-                    avatar = AvatarModel(avatarId: avatarId)
-                } else {
-                    // throw
-                }
+                let avatarId = userData.valueForKey("avatarId") as Int
+                avatar = AvatarModel(avatarId: avatarId)
                 id = userData.valueForKey("id") as? Int
                 money = userData.valueForKey("money") as? Int
             } else {
-                NSException(name: "User exception", reason: "Couldn't fetch user (name: \(userId)) from DB. It wasn't found.", userInfo: nil).raise()
+//                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(userId)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(userId)) from DB \(error?)", userInfo: nil).raise()
@@ -114,6 +105,10 @@ class User {
         if !managedContext.save(&error) {
             NSException(name: "User exception", reason: "Couldn't save user (name: \(username): \(error?)", userInfo: nil).raise()
         }
+    }
+    
+    class func updateUserInDB(bigUsername: String = "", password: String = "", avatarId: Int, userId: Int?) {
+        
     }
     
     class func removeUser(id: Int, callback: ((error: String) -> ())) {
@@ -176,6 +171,9 @@ class User {
             callback(error: "Password cannot be empty!", user: nil);
         }
         
+        // ToDo password/bigUsername regex #$%^&*(OP
+        
+        
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
         let queue: NSOperationQueue = NSOperationQueue()
@@ -223,6 +221,12 @@ class User {
         defaults.synchronize()
     }
     
+    class func clearUserFromPreferences() {
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("user_id")
+        defaults.synchronize()
+    }
+    
     class func getUserFromPreferences() -> User? {
         var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if let userId: AnyObject = defaults.valueForKey("user_id" ) {
@@ -235,6 +239,7 @@ class User {
     
     func updateAvatar(avatarId : Int) {
         self.avatar = AvatarModel(avatarId: avatarId)
+        
         
         // Avatar request for server
         let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(id!)/update/avatar?url=\(avatarId)"
