@@ -27,6 +27,8 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         userNameLabel.text = appDelegate.currentUser!.name
+        
+        
         updateAvatar()
         let beforeMoney = appDelegate.currentUser!.money! / 100
         let afterMoney = appDelegate.currentUser!.money! % 100
@@ -40,6 +42,11 @@ class ProfileController: UIViewController {
         //LAYOUT
         
         let screenSize : CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        userNameLabel.frame.origin.x = screenWidth/2 - userNameLabel.frame.width/2
+        
         
         
     }
