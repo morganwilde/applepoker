@@ -154,18 +154,17 @@
                                             <rect key="frame" x="8" y="8" width="89" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8tj-fI-e73">
-                                            <rect key="frame" x="231" y="38" width="136" height="30"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select this avatar!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Fz-PJ-D9g">
+                                            <rect key="frame" x="234" y="38" width="172" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Select avatar">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="avatarImage" destination="UWS-nM-GdV" id="eeP-OA-XsJ"/>
-                                    <outlet property="selectorButton" destination="8tj-fI-e73" id="Iqq-dx-vkU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
