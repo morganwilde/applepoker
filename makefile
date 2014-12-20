@@ -15,3 +15,17 @@ model:
 	git checkout model
 	git merge master
 	git push origin model
+
+view:
+	git checkout master
+	git pull origin master
+	git checkout view
+	git merge master
+	git push origin view
+
+controller:
+	git checkout master
+	git pull origin master
+	git checkout controller
+	git merge master
+	git push origin controller
