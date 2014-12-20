@@ -35,7 +35,7 @@ class User {
         let predicate = NSPredicate(format: "username = %@", username)
         println(predicate);
         
-        let usersResult = fetchFromDb(predicate, error: &error)
+        let usersResult = User.fetchFromDb(predicate, error: &error)
         if let results = usersResult? {
             if results.count > 0 {
                 let userData = results[0]
@@ -57,7 +57,7 @@ class User {
         var error: NSError?
         let predicate = NSPredicate(format: "id = %d", userId)
         
-        let usersResult = fetchFromDb(predicate, error: &error)
+        let usersResult = User.fetchFromDb(predicate, error: &error)
         if let results = usersResult {
             if results.count > 0 {
                 let userData = results[0]
@@ -74,26 +74,18 @@ class User {
         }
     }
     
-    func fetchFromDb(predicate: NSPredicate?, error: NSErrorPointer) -> [NSManagedObject]? {
-        // This doesn't implicitly create test breakpoints
-        //        let appDelegate: AppDelegate = AppDelegate()
-        //        appDelegate.application(UIApplication.sharedApplication(), didFinishLaunchingWithOptions: nil)
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
+    class func fetchFromDb(predicate: NSPredicate?, error: NSErrorPointer) -> [NSManagedObject]? {
         let userFetch = NSFetchRequest(entityName: "Users")
         userFetch.predicate = predicate
         
-        return managedContext.executeFetchRequest(userFetch, error: error) as [NSManagedObject]?
+        return DbHelper.sharedInstance.moc.executeFetchRequest(userFetch, error: error) as [NSManagedObject]?
     }
     
     class func saveUserInDB(bigUsername: String, password: String, avatarId: Int, userId: Int?) {
         let username = bigUsername.lowercaseString
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
         
-        let entity = NSEntityDescription.entityForName("Users", inManagedObjectContext: managedContext)
-        let userObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity = NSEntityDescription.entityForName("Users", inManagedObjectContext: DbHelper.sharedInstance.moc)
+        let userObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: DbHelper.sharedInstance.moc)
         
         userObject.setValue(username, forKey: "username")
         userObject.setValue(username, forKey: "password")
@@ -102,7 +94,7 @@ class User {
         userObject.setValue(Cash.INITIAL.rawValue, forKey: "money")
         
         var error: NSError?
-        if !managedContext.save(&error) {
+        if !DbHelper.sharedInstance.moc.save(&error) {
             NSException(name: "User exception", reason: "Couldn't save user (name: \(username): \(error?)", userInfo: nil).raise()
         }
     }
@@ -111,13 +103,10 @@ class User {
         var error: NSError?
         
         // Delete from CoreData
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
         let userFetch = NSFetchRequest(entityName: "Users")
         userFetch.predicate = NSPredicate(format: "id == \(id!)")
         
-        let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
+        let usersResult = DbHelper.sharedInstance.moc.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
         
         if let results = usersResult {
             if (results.count > 0) {
@@ -139,7 +128,7 @@ class User {
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB for updating.", userInfo: nil).raise()
         }
-        if (!managedContext.save(&error)) {
+        if !DbHelper.sharedInstance.moc.save(&error) {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB \(error?)", userInfo: nil).raise()
         }
     }
@@ -149,24 +138,22 @@ class User {
         var error: NSError?
         
         // Delete from CoreData
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
         let userFetch = NSFetchRequest(entityName: "Users")
-        userFetch.predicate = NSPredicate(format: "id == '\(id)'")
+        let predicate = NSPredicate(format: "id == '\(id)'")
         
-        let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
+        let usersResult = fetchFromDb(predicate, error: &error)
+//        let usersResult = DbHelper.sharedInstance.moc.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
         
         if let results = usersResult {
             if (results.count > 0) {
-                managedContext.deleteObject(results[0])
+                DbHelper.sharedInstance.moc.deleteObject(results[0])
             } else {
                 NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB for deletion.", userInfo: nil).raise()
         }
-        if (!managedContext.save(&error)) {
+        if !DbHelper.sharedInstance.moc.save(&error) {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id)) from DB \(error?)", userInfo: nil).raise()
         }
         

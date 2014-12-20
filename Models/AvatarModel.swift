@@ -29,13 +29,11 @@ class AvatarModel {
     
     class func getAvatars() -> [AvatarModel] {
         var results : [AvatarModel] = []
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
         let avatarsFetch = NSFetchRequest(entityName: "Avatars")
         
         var error: NSError?
 
-        if let avatars = managedContext.executeFetchRequest(avatarsFetch, error: &error) as [NSManagedObject]? {
+        if let avatars = DbHelper.sharedInstance.moc.executeFetchRequest(avatarsFetch, error: &error) as [NSManagedObject]? {
             if let errorNotNil = error {
                 NSException(name: "Avatar exception", reason: "Fetching avatar from DB returned: \(errorNotNil)", userInfo: nil).raise()
             }
@@ -60,17 +58,15 @@ class AvatarModel {
         if getAvatars().count > 0 {
             return
         }
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
         
-        let entity = NSEntityDescription.entityForName("Avatars", inManagedObjectContext: managedContext)
+        let entity = NSEntityDescription.entityForName("Avatars", inManagedObjectContext: DbHelper.sharedInstance.moc)
         for i in 0...4 {
-            let avatarObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            let avatarObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: DbHelper.sharedInstance.moc)
             avatarObject.setValue(i, forKey: "id")
         }
         
         var error: NSError?
-        if !managedContext.save(&error) {
+        if !DbHelper.sharedInstance.moc.save(&error) {
             NSException(name: "Avatar exception", reason: "Saving ids failed", userInfo: nil).raise()
         }
     }

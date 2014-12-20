@@ -19,7 +19,7 @@ class ProfileController: UIViewController {
         self.navigationController?.pushViewController(image, animated: true)
         
     }
-    
+
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameText: UILabel!

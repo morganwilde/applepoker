@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUser: User?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Save the MOC
+        DbHelper.sharedInstance.moc = managedObjectContext!
+        
         // Save prefix
         println("App started")
         defaults.setObject("avatar_", forKey: "avatar_prefix")
