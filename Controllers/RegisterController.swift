@@ -11,15 +11,15 @@ import UIKit
 
 class RegisterController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var urlImageTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
+    //@IBOutlet weak var urlImageTextField: UITextField!
     @IBOutlet weak var registrationButton: UIButton!
    
     
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
-        let username = textField.text
-        User.createUser(textField.text, callback: { (error, user) -> () in
+        let username = userNameTextField.text
+        User.createUser(userNameTextField.text, callback: { (error, user) -> () in
             if error.isEmpty {
                 
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
@@ -47,8 +47,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textField.delegate = self
-        urlImageTextField.delegate = self
+        userNameTextField.delegate = self
+        //urlImageTextField.delegate = self
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     /*
