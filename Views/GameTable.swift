@@ -10,13 +10,28 @@ import Foundation
 import UIKit
 
 class GameTable: UIView {
+    var background = UIBezierPath()
+    
     override func drawRect(rect: CGRect) {
+        var gl: CAGradientLayer
+        
+        var ringTopColor = UIColorFromRGB(0x82462D).CGColor
+        var ringBotColor = UIColorFromRGB(0x643723).CGColor
+        
+        gl = CAGradientLayer()
+        
+        gl.colors = [ringTopColor, ringBotColor]
+        gl.locations = [0.0, 1.0]
+        
+        
+        
         var ovalPath = UIBezierPath(ovalInRect: rect)
-        UIColorFromRGB(0x209624).setFill()
+        UIColorFromRGB(0x824B32).setFill()
         ovalPath.fill()
         
+        
         var oval2Path = UIBezierPath(ovalInRect: CGRectMake(CGRectGetMinX(rect)+15, CGRectGetMinY(rect)+15, CGRectGetMaxX(rect)-30, CGRectGetMaxY(rect)-30))
-        UIColor.greenColor().setFill()
+        UIColorFromRGB(0x32813C).setFill()
         oval2Path.fill()
     }
     
