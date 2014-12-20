@@ -70,8 +70,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Registration" id="awi-qw-8ZA"/>
                     <connections>
+                        <outlet property="passwordLabel" destination="ypt-lQ-i3p" id="k1a-9n-aH6"/>
+                        <outlet property="passwordTextField" destination="RGd-CF-cfS" id="VSe-Yn-M92"/>
                         <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
                         <outlet property="userNameTextField" destination="H9W-ea-3UW" id="EdV-bA-Bhw"/>
+                        <outlet property="usernameLabel" destination="7X9-h8-a0E" id="itO-ZX-GSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>

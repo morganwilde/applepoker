@@ -11,10 +11,14 @@ import UIKit
 
 class RegisterController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var userNameTextField: UITextField!
-    //@IBOutlet weak var urlImageTextField: UITextField!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    
+    @IBOutlet weak var userNameTextField: ColoredTextField!
+    @IBOutlet weak var passwordTextField: ColoredTextField!
+    
     @IBOutlet weak var registrationButton: UIButton!
-   
+    
     
     @IBAction func registrationButtonAction(sender: UIButton) {
         var success = false
@@ -49,6 +53,30 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         
         userNameTextField.delegate = self
         //urlImageTextField.delegate = self
+        
+        //LAYOUT
+        
+        let screenSize : CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let aligmentX = screenWidth/2 - userNameTextField.frame.width/2
+        
+        usernameLabel.frame.origin.x = aligmentX
+        usernameLabel.frame.origin.y = screenHeight/2 - 50
+        
+        userNameTextField.frame.origin.x = aligmentX
+        userNameTextField.frame.origin.y = screenHeight/2 - 25
+        
+        passwordLabel.frame.origin.x = aligmentX
+        passwordLabel.frame.origin.y = screenHeight/2 + 25
+        
+        passwordTextField.frame.origin.x = aligmentX
+        passwordTextField.frame.origin.y = screenHeight/2 + 50
+        
+        registrationButton.frame.origin.x = aligmentX
+        registrationButton.frame.origin.y = screenHeight/2 + 100
+        
     }
     
     required init(coder aDecoder: NSCoder) {

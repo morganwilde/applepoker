@@ -115,23 +115,26 @@ class User {
         let managedContext = appDelegate.managedObjectContext!
         
         let userFetch = NSFetchRequest(entityName: "Users")
-        userFetch.predicate = NSPredicate(format: "id == '\(id?)'")
+        userFetch.predicate = NSPredicate(format: "id == \(id!)")
         
         let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
         
         if let results = usersResult {
             if (results.count > 0) {
                 if !username.isEmpty {
-                    managedContext.setValue(username, forKey: "username")
+                    results[0].setValue(username, forKey: "username")
                 }
                 if !password.isEmpty {
-                    managedContext.setValue(password, forKey: "password")
+                    results[0].setValue(password, forKey: "password")
                 }
                 if avatarId != -1 {
-                    managedContext.setValue(avatarId, forKey: "avatarId")
+                    results[0].setValue(avatarId, forKey: "avatarId")
+                    println(avatarId)
                 }
             } else {
-                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
+                // User doesn't exist (yet)
+                println("User doesn't exist yet! \(id?)")
+//                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB for updating.", userInfo: nil).raise()
@@ -201,8 +204,11 @@ class User {
             callback(error: "Password cannot be empty!", user: nil);
         }
         
-        // ToDo password/bigUsername regex #$%^&*(OP
-        
+        // Check for incorrect username/password
+        let bigUsernameTest = bigUsername.removeSpaces()
+        let passwordTest = password.removeSpaces()
+        Regex("^\\w+$").test(bigUsernameTest)
+        Regex("^\\w+$").test(passwordTest)
         
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
@@ -269,7 +275,7 @@ class User {
     
     func updateAvatar(avatarId : Int) {
         avatar = AvatarModel(avatarId: avatarId)
-//        updateUserInDB(avatarId: avatarId)
+        updateUserInDB(avatarId: avatarId)
         
         // Avatar request for server
         let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(id!)/update/avatar?url=\(avatarId)"
