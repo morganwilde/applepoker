@@ -131,7 +131,8 @@ class User {
                     managedContext.setValue(avatarId, forKey: "avatarId")
                 }
             } else {
-                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
+                // User doesn't exist (yet) 
+//                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
             NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB for updating.", userInfo: nil).raise()
@@ -269,7 +270,7 @@ class User {
     
     func updateAvatar(avatarId : Int) {
         avatar = AvatarModel(avatarId: avatarId)
-//        updateUserInDB(avatarId: avatarId)
+        updateUserInDB(avatarId: avatarId)
         
         // Avatar request for server
         let avatarSetterUrl = "http://applepoker.herokuapp.com/user/\(id!)/update/avatar?url=\(avatarId)"
