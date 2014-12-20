@@ -24,7 +24,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                 
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
                 var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
-                self.navigationController?.pushViewController(profile, animated: true)
+                self.navigationController?.pushViewController(profile, animated: false)
+                
+                let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
+                var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as ImageController
+                self.navigationController?.pushViewController(image, animated: true)
+                
                 let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
                 appDelegate.currentUser = user
                 
@@ -41,6 +46,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         textField.delegate = self
         urlImageTextField.delegate = self
     }
