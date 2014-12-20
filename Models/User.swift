@@ -115,23 +115,25 @@ class User {
         let managedContext = appDelegate.managedObjectContext!
         
         let userFetch = NSFetchRequest(entityName: "Users")
-        userFetch.predicate = NSPredicate(format: "id == '\(id?)'")
+        userFetch.predicate = NSPredicate(format: "id == \(id!)")
         
         let usersResult = managedContext.executeFetchRequest(userFetch, error: &error) as [NSManagedObject]?
         
         if let results = usersResult {
             if (results.count > 0) {
                 if !username.isEmpty {
-                    managedContext.setValue(username, forKey: "username")
+                    results[0].setValue(username, forKey: "username")
                 }
                 if !password.isEmpty {
-                    managedContext.setValue(password, forKey: "password")
+                    results[0].setValue(password, forKey: "password")
                 }
                 if avatarId != -1 {
-                    managedContext.setValue(avatarId, forKey: "avatarId")
+                    results[0].setValue(avatarId, forKey: "avatarId")
+                    println(avatarId)
                 }
             } else {
-                // User doesn't exist (yet) 
+                // User doesn't exist (yet)
+                println("User doesn't exist yet! \(id?)")
 //                NSException(name: "User exception", reason: "Couldn't fetch user (id: \(id?)) from DB. It wasn't found.", userInfo: nil).raise()
             }
         } else {
