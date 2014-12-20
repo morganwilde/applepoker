@@ -167,10 +167,10 @@ class User {
         })
     }
     
-    class func createUser(bigUsername: String, password: String, avatarId: Int = 0, callback: ((error: String, user: User?) -> ())) -> Void {
+    class func createUser(bigUsername: String, password: String = "", avatarId: Int = 0, callback: ((error: String, user: User?) -> ())) -> Void {
         if bigUsername.isEmpty {
             callback(error: "Username cannot be empty!", user: nil);
-        } else if password.isEmpty {
+        } else if password.isEmpty && false {
             callback(error: "Password cannot be empty!", user: nil);
         }
         
