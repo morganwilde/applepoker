@@ -23,3 +23,11 @@ class Regex {
         return matches.count > 0
     }
 }
+
+extension String {
+    func removeSpaces() -> String {
+        let newString = self.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return newString
+    }
+}
