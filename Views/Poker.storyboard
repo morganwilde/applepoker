@@ -24,7 +24,7 @@
         <!--Registration-->
         <scene sceneID="dbg-IL-hS9">
             <objects>
-                <viewController id="P0V-Ch-mJo" customClass="RegisterController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterScreen" id="P0V-Ch-mJo" customClass="RegisterController" customModule="ApplePoker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0a-9J-ZLV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,8 +71,7 @@
                     <navigationItem key="navigationItem" title="Registration" id="awi-qw-8ZA"/>
                     <connections>
                         <outlet property="registrationButton" destination="ByE-MV-MvG" id="FFU-63-4Pu"/>
-                        <outlet property="textField" destination="H9W-ea-3UW" id="CPE-z9-k2f"/>
-                        <outlet property="urlImageTextField" destination="RGd-CF-cfS" id="4Tc-Tt-FZr"/>
+                        <outlet property="userNameTextField" destination="H9W-ea-3UW" id="EdV-bA-Bhw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzX-fg-xhA" userLabel="First Responder" sceneMemberID="firstResponder"/>

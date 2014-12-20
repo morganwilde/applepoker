@@ -26,13 +26,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create avatars
         AvatarModel.createAvatars()
         
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.backgroundColor = UIColor.whiteColor()
+        
+        let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
+        let registerController = mainStoryboard.instantiateViewControllerWithIdentifier("RegisterScreen") as RegisterController
+        registerController.view.frame = window!.frame
+        var navigationController: UINavigationController = UINavigationController(rootViewController: registerController)
+        
         currentUser = User.getUserFromPreferences()
         if let user = currentUser {
             println("user exists")
             // Go to profile
-        } else {
-            // Go to registration
+            let profileController = mainStoryboard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
+            profileController.view.frame = window!.frame
+            navigationController = UINavigationController(rootViewController: profileController)
         }
+        
+        // Setup navigation
+        
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         
         // Override point for customization after application launch.
         return true
