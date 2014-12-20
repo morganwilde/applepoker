@@ -205,7 +205,8 @@ class User {
         }
         
         // ToDo password/bigUsername regex #$%^&*(OP
-        
+        bigUsername
+        password
         
         let ERROR = "error:"
         let username = bigUsername.lowercaseString
