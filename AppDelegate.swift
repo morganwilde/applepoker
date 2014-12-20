@@ -19,11 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Save prefix
         println("App started")
         defaults.setObject("avatar_", forKey: "avatar_prefix")
         defaults.synchronize()
-
+        // Create avatars
         AvatarModel.createAvatars()
+        
+        currentUser = User.getUserFromPreferences()
+        if let user = currentUser {
+            println("user exists")
+            // Go to profile
+        } else {
+            // Go to registration
+        }
         
         // Override point for customization after application launch.
         return true

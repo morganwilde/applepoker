@@ -2,6 +2,15 @@
 
 ![First](https://raw.githubusercontent.com/morganwilde/applepoker/master/documentation/doc-one.png)
 
+## TODO
+
+1. New, good looking layouts for all screens in the registration/customisation process
+2. A theme (colors and maybe images for button)
+3. Alert remove "error:" prefix
+4. App delegate current user implementation
+5. Go straight to avatar selection after sign-up
+6. Proper field names and values on all screens
+
 ## API
 
 ### URL list
@@ -13,23 +22,3 @@
 4. `http://applepoker.herokuapp.com/user/<identifier>/remove`
 
 ### URL responses
-
-
-
-```Python
-
-@app.route('/user/<username>/add')
-def returnUserAdd(username):
-    """
-    Adds user to user list
-    Return user ID in that list
-    """
-    if len(username) > 0:
-        if not User.checkIfUserWithNameExists(username):
-            user = User(username)
-            return str(user.getUserID())
-        else:
-            return 'error: user with that name exists!'
-    else:
-        return 'error: username cannot be empty!'
-```

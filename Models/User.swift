@@ -156,8 +156,10 @@ class User {
             // Make sure no errors returned
             var returnString = ""
             let success = (deletionResult.lowercaseString.rangeOfString(ERROR) == nil);
+            
             if !success {
-                returnString = deletionResult
+                returnString = deletionResult.stringByReplacingOccurrencesOfString("error: ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+                // Remove "error: "
             }
             
             // Callback on UI Thread
@@ -197,20 +199,38 @@ class User {
                 // User registered, now set the avatar
                 let identifier = addResult.toInt()!
                 
-                self.saveUserInDB(username, password: password, avatarId: avatarId, userId: identifier);
                 myUser = User(username: username, password: password, avatarId: avatarId, id: identifier, money: Cash.INITIAL.rawValue);
+                self.saveUserInDB(username, password: password, avatarId: avatarId, userId: identifier);
+                self.saveUserToPreferences(myUser!)
             } else {
-                returnString = addResult
+                returnString = addResult.stringByReplacingOccurrencesOfString("error: ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
                 // Callback on UI Thread
                 dispatch_async(dispatch_get_main_queue(), {
                     callback(error: returnString, user: myUser);
                 });
             }
+            
             // Callback on UI thread with the new user
             dispatch_async(dispatch_get_main_queue(), {
                 callback(error: returnString, user: myUser);
             });
         })
+    }
+    
+    class func saveUserToPreferences(user: User) {
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(user.id!, forKey: "user_id")
+        defaults.synchronize()
+    }
+    
+    class func getUserFromPreferences() -> User? {
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if let userId: AnyObject = defaults.valueForKey("user_id" ) {
+            let user = User(userId: userId as Int)
+            return user
+        } else {
+            return nil
+        }
     }
     
     func updateAvatar(avatarId : Int) {
