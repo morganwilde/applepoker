@@ -28,29 +28,26 @@ class AvatarModel {
     }
     
     class func getAvatars() -> [AvatarModel] {
-        var results : [AvatarModel] = []
-        let avatarsFetch = NSFetchRequest(entityName: "Avatars")
-        
         var error: NSError?
-
-        if let avatars = DbHelper.sharedInstance.moc.executeFetchRequest(avatarsFetch, error: &error) as [NSManagedObject]? {
-            if let errorNotNil = error {
-                NSException(name: "Avatar exception", reason: "Fetching avatar from DB returned: \(errorNotNil)", userInfo: nil).raise()
+        if let results = DbHelper.get("Avatars", predicate: nil, error: &error) {
+            if let error = error {
+                NSException(name: "Avatar exception", reason: "Fetching avatars from DB returned: \(error)", userInfo: nil).raise()
             }
-            for avatar in avatars {
-                let avatarId = avatar.valueForKey("id")! as Int
-                results += [AvatarModel(avatarId: avatarId)]
+            
+            var avatars : [AvatarModel] = []
+            for result in results {
+                let avatarId = result.valueForKey("id")! as Int
+                avatars += [AvatarModel(avatarId: avatarId)]
             }
 
-            results.sort { (model1, model2) -> Bool in
+            avatars.sort { (model1, model2) -> Bool in
                 return model1.avatarId < model2.avatarId
             }
-            return results
+            return avatars
         } else {
             NSException(name: "Avatar exception", reason: "Fetching avatar ids failed", userInfo: nil).raise()
         }
-
-        return results
+        return []
     }
     
     class func createAvatars() {
@@ -59,16 +56,13 @@ class AvatarModel {
             return
         }
         
-        let entity = NSEntityDescription.entityForName("Avatars", inManagedObjectContext: DbHelper.sharedInstance.moc)
+        var dictionaries = [NSMutableDictionary]()
         for i in 0...4 {
-            let avatarObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: DbHelper.sharedInstance.moc)
-            avatarObject.setValue(i, forKey: "id")
+            let dictionary = NSMutableDictionary()
+            dictionary.setValue(i, forKey: "id")
+            dictionaries.append(dictionary)
         }
-        
-        var error: NSError?
-        if !DbHelper.sharedInstance.moc.save(&error) {
-            NSException(name: "Avatar exception", reason: "Saving ids failed", userInfo: nil).raise()
-        }
+        DbHelper.insert("Avatars", dictionaries: dictionaries)
     }
     
 }

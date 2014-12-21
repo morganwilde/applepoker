@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class Regex {
     let internalExpression: NSRegularExpression
@@ -22,6 +23,7 @@ class Regex {
         let matches = self.internalExpression.matchesInString(input, options: nil, range:NSMakeRange(0, countElements(input)))
         return matches.count > 0
     }
+    
 }
 
 extension String {
@@ -29,5 +31,15 @@ extension String {
         let newString = self.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return newString
+    }
+    
+    func contains(pattern: String) -> Int? {
+        let regex = NSRegularExpression(pattern: pattern, options: .CaseInsensitive, error: nil)!
+        let count = regex.numberOfMatchesInString(self, options: nil, range: NSRange(location: 0, length: countElements(self)))
+        if count > 0 {
+            return count
+        } else {
+            return nil
+        }
     }
 }
