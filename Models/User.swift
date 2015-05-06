@@ -37,9 +37,9 @@ class User {
         
         if let result = result {
             name = result.valueForKey("username") as? String
-            let avatarId = result.valueForKey("avatarId") as Int
+            let avatarId = result.valueForKey("avatarId") as! Int
             avatar = AvatarModel(avatarId: avatarId)
-            id = result.valueForKey("id") as Int?
+            id = result.valueForKey("id") as! Int?
             money = result.valueForKey("money") as? Int
         } else {
             println("User not found!")
@@ -55,7 +55,7 @@ class User {
         
         if let result = result {
             name = result.valueForKey("username") as? String
-            let avatarId = result.valueForKey("avatarId") as Int
+            let avatarId = result.valueForKey("avatarId") as! Int
             avatar = AvatarModel(avatarId: avatarId)
             id = result.valueForKey("id") as? Int
             money = result.valueForKey("money") as? Int
@@ -99,7 +99,7 @@ class User {
             dictionary.setValue(money, forKey: "money")
         }
         
-        if !DbHelper.put("Users", dictionary: dictionary, existancePredicate: predicate!) {
+        if !DbHelper.put("Users", dictionary: dictionary, existancePredicate: predicate) {
             println("New user created, when trying to update user!")
         }
     }
@@ -108,7 +108,7 @@ class User {
     
     class func getUserIdFromPreferences() -> Int? {
         var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        return defaults.valueForKey("user_id") as Int?
+        return defaults.valueForKey("user_id") as! Int?
     }
     
     class func saveUserIdToPreferences(userId: Int) {
@@ -156,7 +156,7 @@ class User {
         let url = ServerHelper.urlAddUser(username)
         ServerHelper.asyncQuery(url, callback: { (response: String) -> () in
             let cleanResponse = response.stringByReplacingOccurrencesOfString(ServerHelper.CONST.ERROR.rawValue, withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-            if (countElements(response) == countElements(cleanResponse)) {
+            if (count(response) == count(cleanResponse)) {
                 let id = response.toInt()!
                 
                 // ToDo cia apkeist vietom, kad sukurti useri imant is DB. T.y. User(identifier)
@@ -182,7 +182,7 @@ class User {
         var error: NSError?
         let predicate = NSPredicate(format: "id = %d", id)
         if !DbHelper.remove("Users", predicate: predicate, error: &error) {
-            println("Couldn't remove the user from DB, got error: \(error?)")
+            println("Couldn't remove the user from DB, got error: \(error)")
         }
         
         // Remove from preferences
@@ -191,7 +191,7 @@ class User {
         let url = ServerHelper.urlRemoveUser(id)
         ServerHelper.asyncQuery(url, callback: { (response: String) -> () in
             let cleanResponse = response.stringByReplacingOccurrencesOfString(ServerHelper.CONST.ERROR.rawValue, withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-            if (countElements(cleanResponse) == countElements(response)) {
+            if (count(cleanResponse) == count(response)) {
                 dispatch_async(dispatch_get_main_queue(), {
                     callback(error: "");
                 });

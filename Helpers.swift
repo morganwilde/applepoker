@@ -20,7 +20,7 @@ class Regex {
     }
     
     func test(input: String) -> Bool {
-        let matches = self.internalExpression.matchesInString(input, options: nil, range:NSMakeRange(0, countElements(input)))
+        let matches = self.internalExpression.matchesInString(input, options: nil, range:NSMakeRange(0, count(input)))
         return matches.count > 0
     }
     
@@ -35,9 +35,9 @@ extension String {
     
     func contains(pattern: String) -> Int? {
         let regex = NSRegularExpression(pattern: pattern, options: .CaseInsensitive, error: nil)!
-        let count = regex.numberOfMatchesInString(self, options: nil, range: NSRange(location: 0, length: countElements(self)))
-        if count > 0 {
-            return count
+        let theCount = regex.numberOfMatchesInString(self, options: nil, range: NSRange(location: 0, length: count(self)))
+        if theCount > 0 {
+            return theCount
         } else {
             return nil
         }

@@ -36,7 +36,7 @@ class AvatarModel {
             
             var avatars : [AvatarModel] = []
             for result in results {
-                let avatarId = result.valueForKey("id")! as Int
+                let avatarId = result.valueForKey("id")! as! Int
                 avatars += [AvatarModel(avatarId: avatarId)]
             }
 

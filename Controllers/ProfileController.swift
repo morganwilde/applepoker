@@ -14,7 +14,7 @@ class ProfileController: UIViewController {
     
     @IBAction func imageAction(sender: UIButton) {
         let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
-        var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as ImageController
+        var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as! ImageController
         self.navigationController?.pushViewController(image, animated: true)
     }
 
@@ -25,7 +25,7 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         userNameLabel.text = appDelegate.currentUser!.name
         
         var borders = CustomBorderView(drawWithin: view, passingFrame: imgButton.frame)
@@ -60,7 +60,7 @@ class ProfileController: UIViewController {
     }
     
     func updateAvatar() {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let filename = appDelegate.currentUser!.avatar?.filename
         imgButton.setInternalImage(filename!)
     }

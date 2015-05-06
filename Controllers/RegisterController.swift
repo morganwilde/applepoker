@@ -27,14 +27,14 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             if error.isEmpty {
                 
                 var storyBoard = UIStoryboard(name: "Poker", bundle: nil)
-                var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as ProfileController
+                var profile = storyBoard.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
                 self.navigationController?.pushViewController(profile, animated: false)
                 
                 let mainStoryboard = UIStoryboard(name: "Poker", bundle: NSBundle.mainBundle())
-                var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as ImageController
+                var image = mainStoryboard.instantiateViewControllerWithIdentifier("ImageTable") as! ImageController
                 self.navigationController?.pushViewController(image, animated: true)
                 
-                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.currentUser = user
                 
                 
@@ -86,13 +86,15 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     /*
      * Keyboard hiding handlers
      */
-    func textFieldShouldReturn(textField: UITextField!) -> Bool // called when 'return' key pressed. return NO to ignore.
+    func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
     {
         textField.resignFirstResponder()
         return true;
     }
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesBegan(touches as Set<NSObject>, withEvent: event)
         self.view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
     }
+
 }

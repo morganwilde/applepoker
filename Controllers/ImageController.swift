@@ -22,7 +22,7 @@ class ImageController: UITableViewController, UITableViewDelegate, UITableViewDa
         return avatars.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as AvatarCellController
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! AvatarCellController
         cell.avatarImage?.image = UIImage(named: self.avatars[indexPath.row].filename)
         
         return cell
@@ -33,7 +33,7 @@ class ImageController: UITableViewController, UITableViewDelegate, UITableViewDa
         //println("You selected cell #\(avatars[indexPath.row].avatarId)!")
         if let navigation = navigationController {
             if let profileController = navigation.viewControllers[navigation.viewControllers.count - 2] as? ProfileController {
-                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.currentUser?.updateAvatar(avatars[indexPath.row].avatarId)
                 //model update avatar
                 

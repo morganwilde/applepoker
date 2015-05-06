@@ -31,7 +31,7 @@ class DbHelper {
         let request = NSFetchRequest(entityName: entityName)
         request.predicate = predicate
         
-        return sharedInstance.moc.executeFetchRequest(request, error: error) as [NSManagedObject]?
+        return sharedInstance.moc.executeFetchRequest(request, error: error) as! [NSManagedObject]?
     }
     
     class func getFirst(entityName: String, predicate: NSPredicate?, error: NSErrorPointer = NSErrorPointer()) -> NSManagedObject? {
@@ -61,7 +61,7 @@ class DbHelper {
             managedObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: sharedInstance.moc)
         }
 
-        managedObject.setValuesForKeysWithDictionary(dictionary)
+        managedObject.setValuesForKeysWithDictionary(dictionary as [NSObject : AnyObject])
         
         if error == nil {
             var error = NSErrorPointer()
@@ -88,12 +88,12 @@ class DbHelper {
         }
         let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: sharedInstance.moc)
         let managedObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: sharedInstance.moc)
-        managedObject.setValuesForKeysWithDictionary(dictionary)
+        managedObject.setValuesForKeysWithDictionary(dictionary as [NSObject : AnyObject])
         
         if error == nil {
             var error: NSError?
             if !sharedInstance.moc.save(&error) {
-                NSException(name: "DB Exception", reason: "Couldn't add the dictionary: \(dictionary) with error: \(error?)", userInfo: nil).raise()
+                NSException(name: "DB Exception", reason: "Couldn't add the dictionary: \(dictionary) with error: \(error)", userInfo: nil).raise()
             }
         } else {
             // Handle errors manually
